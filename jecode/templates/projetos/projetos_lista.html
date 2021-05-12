@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Projetos{% endblock %}
+
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <h1>Projetos</h1>
+    <form class="row g-2">
+        <div class="col-9   ">
+            <input class="form-control" type="text" name="titulo" id="titulo" placeholder="Adicionar título do projeto">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-plus"></i>Criar novo projeto</button>
+        </div>
+    </form>
+    <ul class="projeto-list">
+        {% for p in projetos %}
+        <li class="projeto-item">
+            <span><a href="../projeto_detalhes/{{p.id}}">{{p.nome}}</a></span>
+            <span><i class="fas fa-trash"></i></span>
+            <span><i class="fas fa-edit"></i></span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base_inicio.html' %}
+
+{% load crispy_forms_tags %} ## Carregando a biblioteca
+
+{% block title %}Criar uma conta no Jecode{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-4 offset-md-4">
+        <div class="card  auth-card">
+            <div class="card-body">
+                <h4 class="card-title text-center">Criar uma conta no Jecode</h4>
+                <main class="container">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ next }}">
+
+                        {{ form | crispy }}
+
+                        <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                    </form>
+
+                    <p class="change-form-p">Já possui uma conta? <a href="/usuarios/login">Clique aqui!</a></p>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

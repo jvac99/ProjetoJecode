@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} projeto.nome | Jecode{% endblock %}
+
+{% block content %}
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{projeto.nome}}<span><i class="fas fa-edit"></i></span></h5>
+            </div>
+            <div class="card-body">
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">quad<span><i class="fas fa-edit"></i></span></li>
+                    <li class="list-group-item">A second item<span><i class="fas fa-edit"></i></span></li>
+                    <li class="list-group-item">A third item<span><i class="fas fa-edit"></i></span></li>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary mb-3">
+                    <i class="fas fa-plus"></i>Adicionar outro cartão
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
