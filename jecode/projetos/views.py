@@ -3,9 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import Projeto
 
-projetos = Projeto.objects.all()
-
-
 def index(request):
     return render(request, 'index.html')
 
@@ -22,15 +19,18 @@ def cadastro(request):
 
 @login_required
 def inicio(request):
+    projetos = Projeto.objects.all()
     return render(request, 'projetos/inicio.html', {'projetos': projetos})
 
 
 @login_required
 def projetos_lista(request):
+    projetos = Projeto.objects.all()
     return render(request, 'projetos/projetos_lista.html', {'projetos': projetos})
 
 
 @login_required
 def projeto_detalhes(request, id):
+    projetos = Projeto.objects.all()
     projeto = get_object_or_404(Projeto, pk=id)
     return render(request, 'projetos/projeto_detalhes.html', {'projeto': projeto, 'projetos': projetos})
