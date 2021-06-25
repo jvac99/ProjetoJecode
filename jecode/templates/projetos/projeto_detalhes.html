@@ -1,30 +1,171 @@
 {% extends 'base.html' %}
 
-{% block title %} projeto.nome | Jecode{% endblock %}
+{% load crispy_forms_tags %} ## Carregando a biblioteca
+
+{% block title %} {{projeto.nome}} | Jecode{% endblock %}
 
 {% block content %}
 
-<div class="row row-cols-1 row-cols-md-2 g-4">
-    <div class="col">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">{{projeto.nome}}<span><i class="fas fa-edit"></i></span></h5>
+<div class="container">
+    <h1 class="page-header">Native HTML5 Drag and Drop <small>Full Demo</small></h1>
+    <div id="columns-full" class="columns clearfix">
+        {% for l in listas %}
+        <div class="column" draggable="true">
+            <header>{{l.nome}}</header>
+            <div class="count" data-col-moves="0">
+                {% for atv in atividades %}
+                    {% if atv.lista.id == l.id %}
+                    <form method="post" class="form">
+                        {% csrf_token %}
+                        {{form_as_atividade}}
+                        <button type="submit" class="btn btn-dark">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </form>
+                    <a href="http://">{{atv.titulo}}</a>
+                    {% endif %}
+                {% endfor %}
             </div>
-            <div class="card-body">
+        </div>
+        {% endfor %}
+        <div class="column" draggable="true">
+            <header></header>
+            <div class="count" data-col-moves="0">
+                <form method="post" class="form">
+                    {% csrf_token %}
+                    {{form_lista}}
+                    <button type="submit" class="btn btn-dark">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <small>Taken and updated (with the classList API) from <a
+            href="https://www.html5rocks.com/en/tutorials/dnd/basics/">HTML5Rocks</a><br>
+        No IE support as it does not support the DataTransfer API.</small>
+</div>
 
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">quad<span><i class="fas fa-edit"></i></span></li>
-                    <li class="list-group-item">A second item<span><i class="fas fa-edit"></i></span></li>
-                    <li class="list-group-item">A third item<span><i class="fas fa-edit"></i></span></li>
-                </ul>
+<!--
+<main>
+    <div class="board-carvad">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="">
+                    <section>
+                        <div class="card-header">
+                            <h5 class="card-title">{{projeto.nome}}<span><i class="fas fa-edit"></i></span></h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-8" style="background-color: aqua;">
+                                        <div class="row">
+                                            {% for l in listas %}
+                                            <div class="col">
+                                                <div class="card border-primary mb-3" style="max-width: 18rem;">
+                                                    <div class="card-header">{{l.nome}}</div>
+                                                    <div class="card-body">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">A third item<span><i
+                                                                        class="fas fa-edit"></i></span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor%}
+                                            <div class="col">
+                                                <div class="card border-primary mb-3" style="max-width: 18rem;">
+                                                    <div class="card-header">
+                                                        <form method="post" class="form">
+                                                            {% csrf_token %}
+                                                            {{form_lista}}
+                                                            <button type="submit" class="btn btn-dark">
+                                                                <i class="fas fa-plus"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="card border-primary mb-3" style="max-width: 18rem;">
+                                            <div class="card-header">{{l.nome}}</div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Done</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </section>
+                </div>
             </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary mb-3">
-                    <i class="fas fa-plus"></i>Adicionar outro cartão
-                </button>
+        </div>
+    </div>
+</main>
+
+
+<div class="row lista-accordion-projetos">
+    <div class="accordion-item accordion-projetos">
+        <div class="accordion-projetos-header">
+            <h5 class="accordion-title">
+                <a type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne">
+                    Criar novo projeto
+                </a>
+            </h5>
+        </div>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body cards-projetos-body">
+                <form method="post" class="form">
+                    {% csrf_token %}
+                    {{form_lista}}
+                    <button type="submit" class="btn btn-dark">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+-->
+
+<!--
+<div class="grid-container">
+    <div class="item1">Times</div>
+    <div class="grid-container-teste item2">
+        <div class="bac">Bac</div>
+        <div class="interacao">Interação
+            deadline</div>
+    </div>
+    <div class="item3">
+        <div class="row linhas-cards-projetos">
+            {% for l in listas %}
+            <div class="card cards-projetos">
+                <div class="card-header cards-projetos-header">
+                    <h5 class="card-title"><span>{{l.nome}}</span>
+                        <span><i class="fas fa-trash"></i></span>
+                    </h5>
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="item4">Done</div>
+    <div class="item5">Dependente de integração</div>
+</div>
+-->
 
 {% endblock %}

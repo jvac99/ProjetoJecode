@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %} ## Carregando a biblioteca
+
 {% block title %}Projetos{% endblock %}
 
 {% block content %}
+<!--
 <div class="offset-1 col-10 list-div">
     <h1>Projetos</h1>
     <form class="row g-2">
@@ -14,56 +17,63 @@
         </div>
     </form>
 </div>
+row-cols-1 row-cols-md-2 g-4
+<div class="col">
+            
+        </div>
 
-<div class="row row-cols-1 row-cols-md-2 g-4">
-    <div class="col">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title"><span><a href="../projeto_detalhes/"></a></span>
-                    <span><i class="fas fa-trash"></i></span>
-                    <span><i class="fas fa-edit"></i></span>
-                </h5>
-            </div>
-            <div class="card-body">
+<div class="container lista-cards-projetos">
+    <div class="card cards-projetos">
+        <div class="card-header cards-projetos-header">
+            <h5 class="card-title"><span><a href="#">Criar novo projeto</a>
+                    <i class="fas fa-plus"></i></span>
+            </h5>
+        </div>
+        <div class="card-body cards-projetos-body">
+            <form method="post">
+                {% csrf_token %}
 
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">quad<span><i class="fas fa-edit"></i></span></li>
-                    <li class="list-group-item">A second item<span><i class="fas fa-edit"></i></span></li>
-                    <li class="list-group-item">A third item<span><i class="fas fa-edit"></i></span></li>
-                </ul>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary mb-3">
-                    <i class="fas fa-plus"></i>Adicionar um novo projeto
-                </button>
+                {{ form|crispy }}
+
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+            </form>
+        </div>
+    </div>
+-->
+
+<div class="row lista-accordion-projetos">
+    <div class="accordion-item accordion-projetos">
+        <div class="accordion-projetos-header">
+            <h5 class="accordion-title">
+                <a type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne">
+                    Criar novo projeto
+                </a>
+            </h5>
+        </div>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body cards-projetos-body">
+                <form method="post">
+                    {% csrf_token %}
+
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                </form>
             </div>
         </div>
     </div>
-    {% for p in projetos %}
-    <div class="col">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title"><span><a href="../projeto_detalhes/{{p.id}}">{{p.nome}}</a></span>
-                    <span><i class="fas fa-trash"></i></span>
-                    <span><i class="fas fa-edit"></i></span>
-                </h5>
-            </div>
-            <div class="card-body">
+</div>
 
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">quad<span><i class="fas fa-edit"></i></span></li>
-                    <li class="list-group-item">A second item<span><i class="fas fa-edit"></i></span></li>
-                    <li class="list-group-item">A third item<span><i class="fas fa-edit"></i></span></li>
-                </ul>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary mb-3">
-                    <i class="fas fa-plus"></i>Adicionar outro cartão
-                </button>
-            </div>
+<div class="row linhas-cards-projetos">
+    {% for p in projetos %}
+    <div class="card cards-projetos">
+        <div class="card-header cards-projetos-header" href="../projeto_detalhes/{{p.id}}">
+            <h5 class="card-title"><span><a href="../projeto_detalhes/{{p.id}}">{{p.nome}}</a></span>
+                <a href="../delete/{{p.id}}"><span><i class="fas fa-trash"></i></span></a>
+            </h5>
         </div>
     </div>
     {% endfor %}
 </div>
-
 {% endblock %}
