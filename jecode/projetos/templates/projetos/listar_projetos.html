@@ -40,6 +40,13 @@ row-cols-1 row-cols-md-2 g-4
         </div>
     </div>
 -->
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
 
 <div class="row lista-accordion-projetos">
     <div class="accordion-item accordion-projetos">
@@ -68,9 +75,9 @@ row-cols-1 row-cols-md-2 g-4
 <div class="row linhas-cards-projetos">
     {% for p in projetos %}
     <div class="card cards-projetos">
-        <div class="card-header cards-projetos-header" href="../projeto_detalhes/{{p.id}}">
-            <h5 class="card-title"><span><a href="../projeto_detalhes/{{p.id}}">{{p.nome}}</a></span>
-                <a href="../delete/{{p.id}}"><span><i class="fas fa-trash"></i></span></a>
+        <div class="card-header cards-projetos-header" href="../detalhes_do_projeto/{{p.id}}">
+            <h5 class="card-title"><span><a href="../detalhes_do_projeto/{{p.id}}">{{p.nome}}</a></span>
+                <a href="../deletar_projeto/{{p.id}}"><span><i class="fas fa-trash"></i></span></a>
             </h5>
         </div>
     </div>

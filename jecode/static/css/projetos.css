@@ -405,7 +405,6 @@ main.container-cadastro a:hover, .container-login a:hover {
     align-items: stretch;
     flex-flow: nowrap;
     height: 100%;
-   
     border: 1px solid #ccc;
     margin-left: 10px;
     margin-bottom: 50px;
@@ -465,7 +464,7 @@ main.container-cadastro a:hover, .container-login a:hover {
 
 .grid-container-teste {
     display: grid;
-    grid-template-columns: repeat(2,50%);
+    grid-template-columns: repeat(2, 50%);
 }
 
 .bac {
@@ -476,4 +475,14 @@ main.container-cadastro a:hover, .container-login a:hover {
 .interacao {
     background-color: #235d83;
     height: 100%;
+}
+
+/* Messages */
+
+ul.messages {
+    padding: 0;
+}
+
+ul.messages li {
+    list-style: none;
 }
