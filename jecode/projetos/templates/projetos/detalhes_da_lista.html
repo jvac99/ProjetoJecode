@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %} ## Carregando a biblioteca
+
+{% block title %} {{.nome}} | Jecode{% endblock %}
+
+{% block content %}
+<div class="#"></div>
+<div class="scrumboard_atividades">
+    <div class="itens do">
+        <h1>Pendente</h1>
+        <div class="lista lista_atividades">
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <div class="accordion-header" id="headingOne">
+                        <h5 class="accordion-title">
+                            <a type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                Criar novo projeto
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <form method="post">
+                                {% csrf_token %}
+
+                                {{ form_atividade|crispy }}
+                                <button type="submit" class="btn btn-primary btn-block">Salvar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% for p in pendentes %}
+            <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                <div class="card-header">
+                    <a href="{% url 'projetos:detalhes_da_atividade_do_projeto' p.id %}">{{p.titulo}}</a>
+                    <a href="../../editar_atividade_do_projeto/{{p.id}}">
+                        <span>
+                            <i class="fas fa-plus"></i>
+                        </span>
+                    </a>
+                    <a href="../../mudar_estado_da_atividade_do_projeto/{{p.id}}/1">
+                        <span>
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
+                    <a href="../../deletar_atividade_do_projeto/{{p.id}}">
+                        <span>
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="card-body text-secondary">
+                    <p class="card-text">{{p.descricao}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="itens doing">
+        <h1>Fazendo</h1>
+        <div class="lista lista_atividades">
+            {% for fazendo in fazendo %}
+            <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                <div class="card-header">
+                    <a href="{% url 'projetos:detalhes_da_atividade_do_projeto' fazendo.id %}">{{fazendo.titulo}}</a>
+                    <a href="../../editar_atividade_do_projeto/{{fazendo.id}}">
+                        <span>
+                            <i class="fas fa-plus"></i>
+                        </span>
+                    </a>
+                    <a href="../../mudar_estado_da_atividade_do_projeto/{{fazendo.id}}/0">
+                        <span>
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                    </a>
+                    <a href="../../mudar_estado_da_atividade_do_projeto/{{fazendo.id}}/1">
+                        <span>
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
+                    <a href="../../deletar_atividade_do_projeto/{{fazendo.id}}">
+                        <span>
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="card-body text-secondary">
+                    <p class="card-text">{{fazendo.descricao}}</p>
+                </div>
+            </div>
+
+            {% empty %}
+
+            {% endfor %}
+        </div>
+    </div>
+    <div class="itens done">
+        <h1>Feito</h1>
+        <div class="lista lista_atividades">
+            {% for feito in feito %}
+            <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                <div class="card-header">
+                    <a href="{% url 'projetos:detalhes_da_atividade_do_projeto' feito.id %}">{{feito.titulo}}</a>
+                    <a href="../../editar_atividade_do_projeto/{{feito.id}}">
+                        <span>
+                            <i class="fas fa-plus"></i>
+                        </span>
+                    </a>
+                    <a href="../../mudar_estado_da_atividade_do_projeto/{{feito.id}}/0">
+                        <span>
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                    </a>
+                    <a href="../../deletar_atividade_do_projeto/{{feito.id}}">
+                        <span>
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="card-body text-secondary">
+                    <p class="card-text">{{feito.descricao}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

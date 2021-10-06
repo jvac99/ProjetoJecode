@@ -1,19 +1,139 @@
+.board {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	/*
+	height: 88vh;
+	width: 100%;
+	overflow-y: hidden;
+	overflow-x: scroll;
+	*/
+}
+
+.board_atividades {
+	width: 99%;
+}
+
+.scrumboard {
+	/*
+	display: flex;
+	overflow: auto;
+	flex-direction: row;
+	align
+	justify-content: normal;
+	flex-flow: wrap;
+	position: absolute;
+	height: 86vh;
+	width: max-content;
+  	height: inherit;
+	/*/
+	user-select: none;
+	white-space: nowrap;
+	margin: 10px;
+	overflow-x: auto;
+	overflow-y: auto;
+	display: block;
+}
+
+.scrumboard_atividades {
+	display: flex;
+	flex-wrap: nowrap;
+	max-width: 1200px;
+	margin: 0 auto;
+	font-family: 'Times New Roman', Times, serif;
+}
+
+@media screen and (max-width: 500px) {
+	.scrumboard {
+		display: flex;
+		flex-wrap: wrap;
+		max-width: 1200px;
+		margin: 0 auto;
+		user-select: none;
+		white-space: nowrap;
+		margin: 10px;
+	}
+
+	.scrumboard_atividades {
+		display: flex;
+		flex-wrap: wrap;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+}
+
+.scrumboard_atividades>.itens {
+	flex: 1 1 200px;
+	margin: 10px;
+}
+
+.scrumboard_atividades h1 {
+	text-align: center;
+	color: #fff;
+}
+
+.scrumboard a {
+	list-style: none;
+	text-decoration: none;
+	color: #000;
+}
+
+.scrumboard .colunas {
+	border: 2px solid #dee2e6;
+	border-radius: 5px;
+	background: rgba(155, 174, 250, 0.315);
+}
+
+.scrumboard_atividades a {
+	list-style: none;
+	text-decoration: none;
+	color: #ccc;
+}
+
+.itens {
+	background-color: #ccc;
+}
+
+.do {
+	background-color: rgb(160, 152, 37);
+}
+
+.doing {
+	background-color: rgb(22, 22, 121);
+}
+
+.done {
+	background-color: rgb(10, 131, 10);
+}
+
 .column {
+	/*
 	background-color: #ccc;
 	border-radius: 10px;
 	border: 2px solid #666666;
 	box-shadow: inset 0 0 3px #000;
 	cursor: move;
+	/*
 	float: left;
-	height: 150px;
-	margin-bottom: 30px;
+	margin-bottom: 3000px;
 	margin-right: 5px;
+	height: auto;
+	margin: 10px;
 	text-align: center;
-	width: 150px;
+	width: 100%;
+	*/
+	width: 272px;
+	margin: 0 4px;
+	height: 100%;
+	box-sizing: border-box;
+	display: inline-block;
+	vertical-align: top;
+	white-space: nowrap;
 }
 
-.column header {
-	background: linear-gradient(to right, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+.lista header {
+	background: linear-gradient(to right, rgb(0, 0, 0), rgb(79, 79, 79), rgb(21, 21, 21));
+	/*
 	border-bottom: 1px solid #ddd;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
@@ -21,23 +141,87 @@
 	color: #fff;
 	padding: 5px;
 	text-shadow: #000 0 1px;
+	*/
 }
 
 .column {
 	transition: transform 0.2s ease-out;
 }
 
-.column.over {
+.lista.over {
 	border: 2px dashed #000;
 }
 
-.column.moving {
+.lista.moving {
 	opacity: 0.25;
 	transform: scale(0.8);
 }
 
-.column .count {
+.lista .count {
 	font-weight: bold;
 	padding-top: 15px;
 	text-shadow: #fff 0 1px;
 }
+
+.lista {
+	border-radius: 3px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	max-height: 100%;
+	position: relative;
+	white-space: normal;
+}
+
+.lista_atividades {
+	margin: 10px;
+	transition: 0.3s;
+	height: auto;
+	min-height: 500px;
+	max-height: max-content;
+}
+
+/*
+body {
+	font-family:helvetica, arial;
+	font-size:12px
+   }
+  .scrumboard{
+   margin:0 auto;
+   width:835px;
+  }
+  
+  h1{
+   margin-left:20px;
+   font-size:2rem;
+  }
+   .column {
+	 width: 200px;
+	 float: left;
+	 border: solid 4px black;
+	 height:100vh;
+   }
+   .portlet {
+	 margin: 0 1em 1em 0;
+	 padding: 0.3em;
+   }
+   .portlet-header {
+	 padding: 0.2em 0.3em;
+	 margin-bottom: 0.5em;
+	 position: relative;
+   }
+   .portlet-toggle {
+	 position: absolute;
+	 top: 50%;
+	 right: 0;
+	 margin-top: -8px;
+   }
+   .portlet-content {
+	 padding: 0.4em;
+   }
+   .portlet-placeholder {
+	 border: 1px dotted black;
+	 margin: 0 1em 1em 0;
+	 height: 50px;
+   }
+   */

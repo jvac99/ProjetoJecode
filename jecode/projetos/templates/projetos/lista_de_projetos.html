@@ -5,41 +5,7 @@
 {% block title %}Projetos{% endblock %}
 
 {% block content %}
-<!--
-<div class="offset-1 col-10 list-div">
-    <h1>Projetos</h1>
-    <form class="row g-2">
-        <div class="col-9   ">
-            <input class="form-control" type="text" name="titulo" id="titulo" placeholder="Adicionar título do projeto">
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-plus"></i>Criar novo projeto</button>
-        </div>
-    </form>
-</div>
-row-cols-1 row-cols-md-2 g-4
-<div class="col">
-            
-        </div>
 
-<div class="container lista-cards-projetos">
-    <div class="card cards-projetos">
-        <div class="card-header cards-projetos-header">
-            <h5 class="card-title"><span><a href="#">Criar novo projeto</a>
-                    <i class="fas fa-plus"></i></span>
-            </h5>
-        </div>
-        <div class="card-body cards-projetos-body">
-            <form method="post">
-                {% csrf_token %}
-
-                {{ form|crispy }}
-
-                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-            </form>
-        </div>
-    </div>
--->
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
@@ -76,7 +42,9 @@ row-cols-1 row-cols-md-2 g-4
     {% for p in projetos %}
     <div class="card cards-projetos">
         <div class="card-header cards-projetos-header" href="../detalhes_do_projeto/{{p.id}}">
-            <h5 class="card-title"><span><a href="../detalhes_do_projeto/{{p.id}}">{{p.nome}}</a></span>
+            <h5 class="card-title">
+                <span><a href="../detalhes_do_projeto/{{p.id}}">{{p.nome}}</a></span>
+                <a href="../editar_projeto/{{p.id}}"><span><i class="fas fa-edit"></i></span></a>
                 <a href="../deletar_projeto/{{p.id}}"><span><i class="fas fa-trash"></i></span></a>
             </h5>
         </div>

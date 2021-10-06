@@ -1,0 +1,13 @@
+* {
+    padding: 0;
+    margin: 0;
+    /*  incluem o tamanho padding size e a propriedade border, mas não incluem a propriedade margin.*/
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+a {
+    list-style: none;
+    text-decoration: none;
+    pointer-events: auto;
+}
