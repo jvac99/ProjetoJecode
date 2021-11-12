@@ -22,11 +22,12 @@
             <div class="column flex colunas">
                 <!-- scrumboard row
                 column flex-->
-                <h1>
+                <h2 class="titulo_lista">
                     <a href="../../detalhes_da_lista_do_projeto/{{l.id}}">{{l.nome}}</a>
+                    <a href="../../editar_lista_do_projeto/{{l.id}}"><span><i class="fas fa-edit"></i></span></a>
                     <a href="../../deletar_lista_do_projeto/{{l.id}}/{{projeto.id}}"><span><i
                                 class="fas fa-trash"></i></span></a>
-                </h1>
+                </h2>
                 <div class="lista lista_atividades">
                     {% for atv in atividades %}
                     {% if atv.lista.id == l.id %}
@@ -43,14 +44,15 @@
                     </div>
                     {% endif %}
                     {% endfor %}
-                    <a href="../../nova_atividade_do_projeto/{{l.id}}">Nova atividade<span><i class="fas fa-plus"
-                                style="background-color: grey;"></i></span></a></h1>
+                    <a href="../../nova_atividade_do_projeto/{{l.id}}/1">Nova atividade<span><i
+                                class="fas fa-plus"></i></span></a></h1>
                 </div>
             </div>
             {% endfor %}
             <div class="column flex colunas">
+                <h2 class="titulo_lista">Nova lista</h2>
                 <div class="lista lista_atividades">
-                    <form method="post">
+                    <form method="post" class="form">
                         {% csrf_token %}
 
                         {{ form_lista|crispy }}

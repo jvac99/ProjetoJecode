@@ -53,7 +53,6 @@
 		white-space: nowrap;
 		margin: 10px;
 	}
-
 	.scrumboard_atividades {
 		display: flex;
 		flex-wrap: wrap;
@@ -70,6 +69,10 @@
 .scrumboard_atividades h1 {
 	text-align: center;
 	color: #fff;
+}
+
+.titulo_lista {
+	text-align: center;
 }
 
 .scrumboard a {

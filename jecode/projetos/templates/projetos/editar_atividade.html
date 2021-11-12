@@ -1,7 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'base_inicio.html' %}
 
 {% load crispy_forms_tags %} ## Carregando a biblioteca
 
+{% block title %}Jecode - editar atividade{% endblock %}
 
 {% block content %}
 
@@ -14,17 +15,17 @@
 </ul>
 {% endif %}
 
+<main class="main-forms">
+    <div class="container-forms">
+        <form method="post" class="forms">
+            <h4>Editar atividade</h4>
+            {% csrf_token %}
 
-<main class="main-atividade">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <form method="post" class="form-atividade">
-                {% csrf_token %}
-
-                {{ form_atividadeEditar | crispy }}
-                <button type="submit" class="btn btn-primary btn-block">Salvar</button>
-            </form>
-        </div>
+            {{ form_atividadeEditar | crispy }}
+            <button type="submit" class="btn btn-primary btn-block">Salvar</button>
+            <p class="form-p">Deseja voltar ao início? <a href="{% url 'projetos:inicio' %}">Clique aqui!</a>
+            </p>
+        </form>
     </div>
 </main>
 

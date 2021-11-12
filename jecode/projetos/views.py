@@ -6,18 +6,29 @@ from .models import *
 from .forms import *
 from django.db import IntegrityError
 
+
+# Métodos
+
+# Método para listando todos os projetos.
+
+@login_required
+def listar_projetos(request):
+    return Projeto.objects.all().order_by(
+        '-created_at').filter(usuario=request.user)
+
 # Primeira tela, antes do login e do cadastro.
 
 
 def index(request):
-    return render(request, 'index.html')
+    projetos = listar_projetos(request)  # carregando os projetos
+    return render(request, 'index.html', {'projetos': projetos})
 
 # Primeira tela, depois do login.
 
 
 @login_required
 def inicio(request):
-    projetos = listar_projetos(request)
+    projetos = listar_projetos(request)  # carregando os projetos
     return render(request, 'projetos/inicio.html', {'projetos': projetos})
 
 # Adicionando um novo projeto.
@@ -34,15 +45,7 @@ def novo_projeto(request):
             messages.info(request, 'Projeto salvo com sucesso.')
     return ProjetoForm()
 
-# Listando todos os projetos.
-
-
-@login_required
-def listar_projetos(request):
-    return Projeto.objects.all().order_by(
-        '-created_at').filter(usuario=request.user)
-
-# Tela que tem uma lista dos projetos e um uma função de adicionar.
+# Tela que contém a lista dos projetos e um uma função de adicionar.
 
 
 @login_required
@@ -99,7 +102,7 @@ def deletar_projeto(request, id):
 def listar_listas_projeto(projeto):
     return Lista.objects.all().filter(projeto=projeto)
 
-# Detalhes do projeto tem todas as listas do projeto, estás lista contém as atividades. 
+# Detalhes do projeto tem todas as listas do projeto, estás lista contém as atividades.
 
 
 @login_required
@@ -166,23 +169,7 @@ def detalhes_da_lista_do_projeto(request, id):
             fazendo.append(atv)
         elif atv.status == "feito" or atv.status == "Feito":
             feito.append(atv)
-    if request.method == 'POST':
-        form_atividade = AtividadeForm(request.POST)
-        if form_atividade.is_valid():
-            try:
-                atividade = form_atividade.save(commit=False)
-                atividade.lista = lista
-                atividade.save()
-                return redirect('/detalhes_da_lista_do_projeto/{id}'.format(id=lista.id))
-            except IntegrityError as e:
-                messages.error(
-                    request, 'Error já existe uma atividade com este titulo.')
-                return render(request, 'projetos/detalhes_da_lista.html', {'form_atividade': form_atividade, 'projetos': projetos})
-        else:
-            return render(request, 'projetos/detalhes_da_lista.html', {'pendentes': pendentes, 'fazendo': fazendo, 'feito': feito, 'form_atividade': form_atividade, 'projetos': projetos})
-    else:
-        form_atividade = AtividadeForm()
-        return render(request, 'projetos/detalhes_da_lista.html', {'pendentes': pendentes, 'fazendo': fazendo, 'feito': feito, 'form_atividade': form_atividade,  'projetos': projetos})
+    return render(request, 'projetos/detalhes_da_lista.html', {'lista': lista, 'pendentes': pendentes, 'fazendo': fazendo, 'feito': feito,  'projetos': projetos})
 
 
 @login_required
@@ -200,12 +187,25 @@ def deletar_lista_do_projeto(request, id_lista, id_projeto):
 
 @login_required
 def detalhes_da_atividade_do_projeto(request, id):
+    atividade = get_object_or_404(Atividade, pk=id)
+    subatividades = Subatividade.objects.all().filter(atividade=atividade)
     projetos = listar_projetos(request)
-    return render(request, 'projetos/projeto_atividades.html', {'projetos': projetos})
+    pendentes = []
+    fazendo = []
+    feito = []
+    for atv in subatividades:
+        if atv.status == "pendente" or atv.status == "Pendente":
+            pendentes.append(atv)
+        elif atv.status == "fazendo" or atv.status == "Fazendo":
+            fazendo.append(atv)
+        elif atv.status == "feito" or atv.status == "Feito":
+            feito.append(atv)
+    projetos = listar_projetos(request)
+    return render(request, 'projetos/detalhes_da_atividade.html', {'projetos': projetos, 'atividade': atividade, 'pendentes': pendentes, 'fazendo': fazendo, 'feito': feito})
 
 
 @login_required
-def nova_atividade_do_projeto(request, id_lista):
+def nova_atividade_do_projeto(request, id_lista, prox):
     projetos = listar_projetos(request)
     lista = get_object_or_404(Lista, pk=id_lista)
     if request.method == 'POST':
@@ -215,7 +215,9 @@ def nova_atividade_do_projeto(request, id_lista):
                 atividade = form_atividade.save(commit=False)
                 atividade.lista = lista
                 atividade.save()
-                return redirect('/detalhes_do_projeto/{id}'.format(id=lista.projeto.id))
+                endereco = '/detalhes_do_projeto/{id}'.format(
+                    id=lista.projeto.id) if prox else '/detalhes_da_lista_do_projeto/{id}'.format(id=lista.id)
+                return redirect(endereco)
             except IntegrityError as e:
                 messages.error(
                     request, 'Error já existe uma atividade com este titulo.')
@@ -270,16 +272,92 @@ def editar_atividade_do_projeto(request, id):
         else:
             return render(request, 'projetos/editar_atividade.html', {'form_atividadeEditar': form_atividadeEditar})
     else:
-
         form_atividadeEditar = AtividadeFormEditar(instance=atividade)
         return render(request, 'projetos/editar_atividade.html', {'form_atividadeEditar': form_atividadeEditar})
 
 
 # Deleta uma atividade de uma lista do projeto
+
 @login_required
 def deletar_atividade_do_projeto(request, id):
-    atividade = get_object_or_404(Atividade, pk=id)  # Buscando a
+    atividade = get_object_or_404(Atividade, pk=id)  # Buscando a atividade
     lista = atividade.lista
     atividade.delete()
     messages.info(request, 'Atividade deletada com sucesso.')
     return redirect('/detalhes_do_projeto/{id}'.format(id=lista.projeto.id))
+
+
+@login_required
+def nova_subatividade_do_projeto(request, id_atividade):
+    projetos = listar_projetos(request)
+    atividade = get_object_or_404(Atividade, pk=id_atividade)
+    if request.method == 'POST':
+        form_subatividade = SubatividadeForm(request.POST)
+        if form_subatividade.is_valid():
+            try:
+                subatividade = form_subatividade.save(commit=False)
+                subatividade.atividade = atividade
+                subatividade.save()
+                return redirect('/detalhes_da_atividade_do_projeto/{id}'.format(id=atividade.id))
+            except IntegrityError as e:
+                messages.error(
+                    request, 'Error já existe uma subatividade com este titulo.')
+                return render(request, 'projetos/nova_subatividade.html', {'form_subatividade': form_subatividade, 'projetos': projetos})
+        else:
+            return render(request, 'projetos/nova_subatividade.html', {'form_subatividade': form_subatividade, 'projetos': projetos})
+    else:
+        form_subatividade = SubatividadeForm()
+        return render(request, 'projetos/nova_subatividade.html', {'form_subatividade': form_subatividade, 'projetos': projetos})
+
+
+@login_required
+def mudar_estado_da_subatividades_do_projeto(request, id, dir):
+    subatv = get_object_or_404(Subatividade, pk=id)
+
+    if subatv.status == "pendente" or subatv.status == "Pendente":
+        subatv.status = "fazendo"
+    elif (subatv.status == "fazendo" or subatv.status == "Fazendo"):
+        if dir:
+            subatv.status = "feito"
+        else:
+            subatv.status = "pendente"
+    else:
+        subatv.status = "fazendo"
+    subatv.save()
+    return redirect('/detalhes_da_atividade_do_projeto/{id}'.format(id=subatv.atividade.id))
+
+
+def listar_subatividades_do_projeto():
+    return Subatividade.objects.all()
+
+
+@login_required
+def editar_subatividade_do_projeto(request, id):
+    subatividade = get_object_or_404(Subatividade, pk=id)
+    if request.method == 'POST':
+        form_subatividadeEditar = SubatividadeFormEditar(
+            request.POST, instance=subatividade)
+        if form_subatividadeEditar.is_valid():
+            try:
+                subatividade = form_subatividadeEditar.save(commit=False)
+                subatividade.save()
+                return redirect('/detalhes_da_atividade_do_projeto/{id}'.format(id=subatividade.atividade.id))
+            except IntegrityError as e:
+                return render(request, 'projetos/editar_subatividade.html', {'form_subatividadeEditar': form_subatividadeEditar})
+        else:
+            return render(request, 'projetos/editar_subatividade.html', {'form_subatividadeEditar': form_subatividadeEditar})
+    else:
+        form_subatividadeEditar = SubatividadeFormEditar(instance=subatividade)
+        return render(request, 'projetos/editar_subatividade.html', {'form_subatividadeEditar': form_subatividadeEditar})
+
+
+# Deleta uma atividade de uma lista do projeto
+
+@login_required
+def deletar_subatividade_do_projeto(request, id):
+    subatividade = get_object_or_404(
+        Subatividade, pk=id)  # Buscando a subatividade
+    atividade = subatividade.atividade
+    subatividade.delete()
+    messages.info(request, 'subatividade deletada com sucesso.')
+    return redirect('/detalhes_da_atividade_do_projeto/{id}'.format(id=atividade.id))

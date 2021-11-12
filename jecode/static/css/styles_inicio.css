@@ -5,6 +5,36 @@
    font-family: 'Times New Roman', Times, serif;
 }
 
+.main-forms {
+   background-repeat: no-repeat;
+   min-height: 100vh;
+   min-width: 100vw;
+   /*
+   display: grid;
+   place-items: center;
+    background: linear-gradient(45deg, #8e2de2, #4a00e0);
+   */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.container-forms {
+   margin: 2rem;
+}
+
+.forms {
+   display: flex;
+   flex-direction: column;
+   /*align-items: center;*/
+   width: 100%;
+   max-width: 32rem;
+   background-color: #fff;
+   padding: 1.5rem;
+   border-radius: 0.5rem;
+   box-shadow: 0 0 1.8rem rgba(0, 0, 0, 0.15);
+}
+
 /* Login*/
 
 .main-login {
@@ -37,8 +67,8 @@
    box-shadow: 0 0 1.8rem rgba(0, 0, 0, 0.15);
 }
 
-
 /* Cadastro */
+
 .main-cadastro {
    background: linear-gradient(45deg, #8e2de2, #4a00e0);
    background-repeat: no-repeat;
@@ -69,7 +99,7 @@
    box-shadow: 0 0 1.8rem rgba(0, 0, 0, 0.15);
 }
 
-.form-cadastro label, .form-login label {
+.form-cadastro label, .form-login label, .forms label {
    width: 100%;
    color: #777;
    align-self: flex-start;
@@ -81,14 +111,13 @@
    text-align: center;
 }
 
-.container-cadastro h4, .container-login h4  {
+.container-cadastro h4, .container-login h4, .container-forms h4 {
    color: #00004e;
    font-weight: 600;
    margin-bottom: 2rem;
    position: relative;
    text-align: center;
 }
-
 
 .botao {
    font-size: 0.8125rem;
@@ -122,7 +151,7 @@
 
 /* Messages */
 
-ul{
+ul {
    padding: 0;
    font-size: 15px;
 }

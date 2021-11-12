@@ -2,7 +2,7 @@
 
 {% load crispy_forms_tags %} ## Carregando a biblioteca
 
-{% block title %}Jecode - nova atividade{% endblock %}
+{% block title %}Jecode - editar subatividade{% endblock %}
 
 {% block content %}
 
@@ -18,10 +18,10 @@
 <main class="main-forms">
     <div class="container-forms">
         <form method="post" class="forms">
-            <h4>Nova atividade</h4>
+            <h4>Editar subatividade</h4>
             {% csrf_token %}
 
-            {{ form_atividade | crispy }}
+            {{ form_subatividadeEditar | crispy }}
             <button type="submit" class="btn btn-primary btn-block">Salvar</button>
             <p class="form-p">Deseja voltar ao início? <a href="{% url 'projetos:inicio' %}">Clique aqui!</a>
             </p>

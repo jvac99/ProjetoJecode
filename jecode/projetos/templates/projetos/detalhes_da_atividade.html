@@ -13,18 +13,18 @@
             {% for p in pendentes %}
             <div class="card border-secondary mb-3" style="max-width: 18rem;">
                 <div class="card-header">
-                    <a href="{% url 'projetos:detalhes_da_atividade_do_projeto' p.id %}">{{p.titulo}}</a>
-                    <a href="../../editar_atividade_do_projeto/{{p.id}}">
+                    <a href="">{{p.titulo}}</a>
+                    <a href="../../editar_subatividade_do_projeto/{{p.id}}">
                         <span>
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-plus"></i>
                         </span>
                     </a>
-                    <a href="../../mudar_estado_da_atividade_do_projeto/{{p.id}}/1">
+                    <a href="../../mudar_estado_da_subatividade_do_projeto/{{p.id}}/1">
                         <span>
                             <i class="fas fa-hand-point-right"></i>
                         </span>
                     </a>
-                    <a href="../../deletar_atividade_do_projeto/{{p.id}}">
+                    <a href="../../deletar_subatividade_do_projeto/{{p.id}}">
                         <span>
                             <i class="fas fa-times"></i>
                         </span>
@@ -35,7 +35,7 @@
                 </div>
             </div>
             {% endfor %}
-            <a href="../../nova_atividade_do_projeto/{{lista.id}}/0"><span>Nova atividade<i
+            <a href="../../nova_subatividade_do_projeto/{{atividade.id}}">Nova Subatividade<span><i
                         class="fas fa-plus"></i></span></a></h1>
         </div>
     </div>
@@ -46,23 +46,23 @@
             {% for fazendo in fazendo %}
             <div class="card border-secondary mb-3" style="max-width: 18rem;">
                 <div class="card-header">
-                    <a href="{% url 'projetos:detalhes_da_atividade_do_projeto' fazendo.id %}">{{fazendo.titulo}}</a>
-                    <a href="../../editar_atividade_do_projeto/{{fazendo.id}}">
+                    <a href="">{{fazendo.titulo}}</a>
+                    <a href="../../editar_subatividade_do_projeto/{{fazendo.id}}">
                         <span>
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-plus"></i>
                         </span>
                     </a>
-                    <a href="../../mudar_estado_da_atividade_do_projeto/{{fazendo.id}}/0">
+                    <a href="../../mudar_estado_da_subatividade_do_projeto/{{fazendo.id}}/0">
                         <span>
                             <i class="fas fa-hand-point-left"></i>
                         </span>
                     </a>
-                    <a href="../../mudar_estado_da_atividade_do_projeto/{{fazendo.id}}/1">
+                    <a href="../../mudar_estado_da_subatividade_do_projeto/{{fazendo.id}}/1">
                         <span>
                             <i class="fas fa-hand-point-right"></i>
                         </span>
                     </a>
-                    <a href="../../deletar_atividade_do_projeto/{{fazendo.id}}">
+                    <a href="../../deletar_subatividade_do_projeto/{{fazendo.id}}">
                         <span>
                             <i class="fas fa-times"></i>
                         </span>
@@ -84,18 +84,18 @@
             {% for feito in feito %}
             <div class="card border-secondary mb-3" style="max-width: 18rem;">
                 <div class="card-header">
-                    <a href="{% url 'projetos:detalhes_da_atividade_do_projeto' feito.id %}">{{feito.titulo}}</a>
-                    <a href="../../editar_atividade_do_projeto/{{feito.id}}">
+                    <a href="">{{feito.titulo}}</a>
+                    <a href="../../editar_subatividade_do_projeto/{{feito.id}}">
                         <span>
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-plus"></i>
                         </span>
                     </a>
-                    <a href="../../mudar_estado_da_atividade_do_projeto/{{feito.id}}/0">
+                    <a href="../../mudar_estado_da_subatividade_do_projeto/{{feito.id}}/0">
                         <span>
                             <i class="fas fa-hand-point-left"></i>
                         </span>
                     </a>
-                    <a href="../../deletar_atividade_do_projeto/{{feito.id}}">
+                    <a href="../../deletar_subatividade_do_projeto/{{feito.id}}">
                         <span>
                             <i class="fas fa-times"></i>
                         </span>
@@ -110,4 +110,5 @@
     </div>
 </div>
 </div>
+
 {% endblock %}
