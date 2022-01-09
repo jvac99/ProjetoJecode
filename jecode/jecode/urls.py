@@ -7,6 +7,6 @@ urlpatterns = [
     # user management
     path('accounts/', include('allauth.urls')),
     # local
-    path('', include('projetos.urls', namespace='projetos')),
+    path('', include('quadros.urls', namespace='quadros')),
     path('', include('usuarios.urls', namespace='usuarios')),
 ]

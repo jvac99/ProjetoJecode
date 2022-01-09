@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %} ## Carregando a biblioteca
+
+{% block title %}Quadros{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+<div class="row linhas-cards-quadros">
+    <div class="card cards-quadros">
+        <div class="card-header cards-quadros-header">
+            <h5 class="card-title">
+                <a href="{% url 'quadros:novo_quadro'%}">Criar novo quadro</a>
+            </h5>
+        </div>
+    </div>
+</div>
+
+<div class="row linhas-cards-quadros">
+    {% for q in quadros %}
+    <div class="card cards-quadros">
+        <div class="card-header cards-quadros-header" href="../quadro/{{q.id}}">
+            <h5 class="card-title">
+                <span><a href="../quadro/{{q.id}}">{{q.nome}}</a></span>
+                <a href="../editar_quadro/{{q.id}}"><span><i class="fas fa-edit"></i></span></a>
+                <a href="../deletar_quadro/{{q.id}}"><span><i class="fas fa-trash"></i></span></a>
+            </h5>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

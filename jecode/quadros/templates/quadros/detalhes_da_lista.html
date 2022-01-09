@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %} ## Carregando a biblioteca
+
+{% block title %} {{.nome}} | Jecode{% endblock %}
+
+{% block content %}
+<div class="#"></div>
+<section class="board_kanban">
+    <header class="board_kanban_header">
+        <div class="bk_item">Priorizadas</div>
+        <div class="bk_item">Preparação</div>
+        <div class="bk_item">Software</div>
+        <div class="bk_item">Arte</div>   
+        <div class="bk_item">Design</div> 
+        <div class="bk_item">Som</div> 
+        <div class="bk_item">Integração</div> 
+        <div class="bk_item">Teste</div> 
+        <div class="bk_item">Feito</div> 
+    </header>  
+
+    <div class="board_kanban_c1">
+        <div class="board_kanban_titulo">
+            <h3>Urgentes</h3> 
+        </div> 
+    </div>
+    <div class="board_kanban_c2">
+        <h3>Independentes</h3> 
+    </div>
+    <div class="board_kanban_c3">
+        <h3>Dependentes</h3> 
+    </div>
+    <div class="board_kanban_c4">
+        <h3>Melhorias</h3> 
+    </div>
+    <div class="board_kanban_c5">
+        <h3>Não planejados</h3> 
+    </div>
+    <div class="board_kanban_urgentes">
+        <div class="bk_item">Priorizadas</div>
+        <div class="bk_item">Preparação</div>
+        <div class="bk_item">Software</div>
+        <div class="bk_item">Arte</div>   
+        <div class="bk_item">Design</div> 
+        <div class="bk_item">Som</div> 
+        <div class="bk_item">Integração</div> 
+        <div class="bk_item">Teste</div> 
+        <div class="bk_item">Feito</div> 
+    </div>
+    <div class="board_kanban_independentes">
+        <div class="bk_item">Priorizadas</div>
+        <div class="bk_item">Preparação</div>
+        <div class="bk_item">Software</div>
+        <div class="bk_item">Arte</div>   
+        <div class="bk_item">Design</div>  
+        <div class="bk_item">Som</div> 
+        <div class="bk_item">Integração</div> 
+        <div class="bk_item">Teste</div> 
+        <div class="bk_item">Feito</div> 
+    </div>
+    <div class="board_kanban_dependentes">
+        <div class="bk_item">Priorizadas</div>
+        <div class="bk_item">Preparação</div>
+        <div class="bk_item">Software</div>
+        <div class="bk_item">Arte</div>   
+        <div class="bk_item">Design</div> 
+        <div class="bk_item">Som</div> 
+        <div class="bk_item">Integração</div> 
+        <div class="bk_item">Teste</div> 
+        <div class="bk_item">Feito</div> 
+    </div>
+    <div class="board_kanban_melhorias">
+        <div class="bk_item">Priorizadas</div>
+        <div class="bk_item">Preparação</div>
+        <div class="bk_item">Software</div>
+        <div class="bk_item">Arte</div>   
+        <div class="bk_item">Design</div> 
+        <div class="bk_item">Som</div> 
+        <div class="bk_item">Integração</div> 
+        <div class="bk_item">Teste</div> 
+        <div class="bk_item">Feito</div> 
+    </div>   
+    <div class="board_kanban_np">
+        <div class="bk_item">Priorizadas</div>
+        <div class="bk_item">Preparação</div>
+        <div class="bk_item">Software</div>
+        <div class="bk_item">Arte</div>   
+        <div class="bk_item">Design</div> 
+        <div class="bk_item">Som</div> 
+        <div class="bk_item">Integração</div> 
+        <div class="bk_item">Teste</div> 
+        <div class="bk_item">Feito</div>
+    </div> 
+
+</section>
+</div>
+{% endblock %}

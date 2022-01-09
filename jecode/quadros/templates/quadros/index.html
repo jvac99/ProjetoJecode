@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Jecode{% endblock %}
+
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    {% if user.is_authenticated %}
+    <h1>Bem-vindo ao Jecode</h1>
+    {% else %}
+    <h1>O que é o Jecode?</h1>
+    <p>É uma aplicação Web para o controle de um processo de desenvolvimento de jogos para equipes com dedicação de tempo parcial ou variável.</p>
+    {% endif %}
+</div>
+{% endblock %}
