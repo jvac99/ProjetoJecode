@@ -28,7 +28,7 @@
       href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"
     />
     <link
-      href="{% static 'fontawesome_free/css/all.min.css' %}"
+      href="{% static 'fa/css/all.min.css' %}"
       rel="stylesheet"
       type="text/css"
     />
@@ -37,12 +37,16 @@
       href="{% static 'css/style_general.css' %}"
       type="text/css"
     />
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'css/bootstrap/bootstrap.min.css' %}"
+    />
     <link
       rel="stylesheet"
       href="{% static 'css/quadros/quadros.css' %}"
       type="text/css"
     />
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
   </head>
 
   <body>
@@ -50,9 +54,9 @@
       <heade class="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container">
-            <a class="navbar-brand h1 mb-0" href="{% url 'quadros:index'%}"
-              >Jecode</a
-            >
+            <a class="navbar-brand h1 mb-0" href="{% url 'quadros:index'%}">
+              Jecode
+            </a>
             <button
               class="navbar-toggler"
               type="button"
@@ -68,9 +72,10 @@
               <ul class="navbar-nav mr-auto">
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'quadros:quadros'%}"
-                    ><i class="fa fa-home"></i>Home</a
-                  >
+                  <a class="nav-link" href="{% url 'quadros:quadros'%}">
+                    <i class="fa fa-home"></i>
+                    Home
+                  </a>
                 </li>
                 <li class="nav-item dropdown">
                   <a
@@ -90,8 +95,8 @@
                         class="dropdown-item"
                         href="{% url 'quadros:quadro' quadro.id %}"
                       >
-                        <i class="fa fa-file-alt"></i>{{quadro.nome}}</a
-                      >
+                        <i class="fa fa-file-alt"></i>{{quadro.nome}}
+                      </a>
                     </li>
                     {% endfor %}
                   </ul>

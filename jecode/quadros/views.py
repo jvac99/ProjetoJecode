@@ -35,7 +35,10 @@ def quadros(request):
 
 @login_required
 def quadro(request, id_quadro):
-    quadro = get_object_or_404(Quadro, pk=id_quadro)
+    try:
+        quadro = get_object_or_404(Quadro, pk=id_quadro)
+    except:
+        redirect('/home')
     quadros = listar_quadros(request)  # carregando os quadros
     return render(request, 'quadros/quadro.html', {'quadros': quadros, 'quadro': quadro})
 
